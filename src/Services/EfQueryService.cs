@@ -1,0 +1,31 @@
+﻿using Microsoft.EntityFrameworkCore;
+using RealEstate.Data;
+using RealEstate.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace RealEstate.Services
+{
+	public class EfDataRepository : IDataRepository
+	{
+		public EfDataRepository(ApplicationDbContext context)
+		{
+			_context = context;
+		}
+
+		readonly ApplicationDbContext _context;
+
+		public async Task<List<RealEstateObject>> GetFeaturedObjects()
+		{
+			var topObjects = await _context
+				.RealEstateObjects
+				.OrderByDescending(r => r.LastUpdatedUtc)
+				.Take(6)
+				.ToListAsync();
+
+			return topObjects;
+		}
+	}
+}
