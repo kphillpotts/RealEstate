@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model RealEstate.Models.BaseViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -38,21 +40,15 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Masthead -->
+    @if (Model.ShowMasterHeader)
+    {
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-
-            <!-- Masthead Avatar Image -->
-            @*<img class="masthead-avatar mb-5" src="~/img/avataaars.svg" alt="">*@
-
             <!-- Masthead Heading -->
             <h1 class="masthead-heading text-uppercase mb-0">RealEstate Inc.</h1>
 
@@ -70,8 +66,8 @@
 
         </div>
     </header>
+    }
 
-    <!-- Portfolio Section -->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             @RenderBody()
@@ -135,45 +131,7 @@
         </a>
     </div>
 
-    <!-- Portfolio Modal 1 -->
-    @*<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            <i class="fas fa-times"></i>
-                        </span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title -->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                                    <!-- Icon Divider -->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon">
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image -->
-                                    <img class="img-fluid rounded mb-5" src="img/portfolio/cabin.png" alt="">
-                                    <!-- Portfolio Modal - Text -->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
-                                        Close Window
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
+    <!-- Modal container -->
     <div class="portfolio-modal modal fade" id="modalContainer" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -183,11 +141,11 @@
                     </span>
                 </button>
                 <div class="modal-body" id="modalBody">
-                    Body
+                    Please wait...we're loading...wish we had some cloud power to speed things up!
                 </div>
-                <div class="modal-footer">
+                @*<div class="modal-footer">
                     Footer
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -218,9 +176,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("body").on("click", ".modal-content", function (e) {
-                e.preventDefault();
                 var contentUrl = $(this).data("contenturl");
-                $("#modalBody").load(contentUrl);
+                if (contentUrl != null) {
+                    e.preventDefault();
+                    $("#modalBody").load(contentUrl);
+                }
             });
         });
     </script>

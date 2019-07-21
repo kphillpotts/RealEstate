@@ -2,7 +2,7 @@ using System;
 
 namespace RealEstate.Models
 {
-	public class ErrorViewModel
+	public class ErrorViewModel : BaseViewModel
 	{
 		public string RequestId { get; set; }
 

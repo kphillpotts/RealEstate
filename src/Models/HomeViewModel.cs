@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RealEstate.Models
 {
-	public class HomeViewModel
+	public class HomeViewModel : BaseViewModel
 	{
 		public List<RealEstateObject> FeaturedObjects { get; set; }
 	}

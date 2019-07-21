@@ -6,6 +6,7 @@ using RealEstate.Services;
 
 namespace RealEstate.Controllers
 {
+	[Route("")]
 	public class HomeController : Controller
 	{
 		public HomeController(IDataRepository repo)
@@ -15,22 +16,32 @@ namespace RealEstate.Controllers
 
 		readonly IDataRepository _repo;
 
+		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
 			var featuredObjects = await _repo.GetFeaturedObjects();
 
 			var vm = new HomeViewModel
 			{
+				ShowMasterHeader = true,
 				FeaturedObjects = featuredObjects
 			};
 
 			return View(vm);
 		}
 
-		public async Task<ActionResult> ObjectDetails(int objectId)
+		[HttpGet("objectdetailsmodal/{objectId}", Name = "ObjectDetailsRoute")]
+		public async Task<ActionResult> ObjectDetailsPartial(int objectId)
 		{
 			var objectDetails = await _repo.GetObjectDetails(objectId);
-			return PartialView("_ObjectDetailsModal", objectDetails);
+
+			var vm = new RealEstateObjectViewModel
+			{
+				Object = objectDetails,
+				ImageUrl = $"/assets/objectimages/object-{objectDetails.Id}.jpg"
+			};
+
+			return PartialView("_ObjectDetailsModal", vm);
 		}
 
 		public IActionResult Privacy()
