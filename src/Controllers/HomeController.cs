@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RealEstate.Data;
-using RealEstate.Entities;
 using RealEstate.Models;
 using RealEstate.Services;
-using RealEstate.ViewModels;
 
 namespace RealEstate.Controllers
 {
 	public class HomeController : Controller
 	{
-		public HomeController(IDataRepository queryService)
+		public HomeController(IDataRepository repo)
 		{
-			_queryService = queryService;
+			_repo = repo;
 		}
 
-		readonly IDataRepository _queryService;
+		readonly IDataRepository _repo;
 
 		public async Task<IActionResult> Index()
 		{
-			var featuredObjects = await _queryService.GetFeaturedObjects();
+			var featuredObjects = await _repo.GetFeaturedObjects();
 
 			var vm = new HomeViewModel
 			{
@@ -32,6 +25,12 @@ namespace RealEstate.Controllers
 			};
 
 			return View(vm);
+		}
+
+		public async Task<ActionResult> ObjectDetails(int objectId)
+		{
+			var objectDetails = await _repo.GetObjectDetails(objectId);
+			return PartialView("_ObjectDetailsModal", objectDetails);
 		}
 
 		public IActionResult Privacy()

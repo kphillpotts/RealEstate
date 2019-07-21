@@ -1,7 +1,7 @@
 ﻿using RealEstate.Entities;
 using System.Collections.Generic;
 
-namespace RealEstate.ViewModels
+namespace RealEstate.Models
 {
 	public class HomeViewModel
 	{

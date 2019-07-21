@@ -19,6 +19,7 @@ namespace RealEstate
 					NumberOfBedrooms = i + 1,
 					Id = i,
 					Price = i * 10000,
+					Description = "This is a beautiful object. Look at its ID of " + i,
 					LastUpdatedUtc = DateTimeOffset.UtcNow.AddDays(-i)
 				});
 			}

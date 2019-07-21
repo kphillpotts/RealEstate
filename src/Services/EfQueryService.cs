@@ -27,5 +27,14 @@ namespace RealEstate.Services
 
 			return topObjects;
 		}
+
+		public async Task<RealEstateObject> GetObjectDetails(int objectId)
+		{
+			var objectDetails = await _context
+				.RealEstateObjects
+				.FirstOrDefaultAsync(r => r.Id == objectId);
+
+			return objectDetails;
+		}
 	}
 }
