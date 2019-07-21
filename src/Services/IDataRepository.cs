@@ -1,7 +1,5 @@
 ﻿using RealEstate.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RealEstate.Services
@@ -10,5 +8,6 @@ namespace RealEstate.Services
 	{
 		Task<List<RealEstateObject>> GetFeaturedObjects();
 		Task<RealEstateObject> GetObjectDetails(int objectId);
+		Task<List<RealEstateObject>> GetAllObjects();
 	}
 }

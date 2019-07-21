@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using RealEstate.Models;
 using RealEstate.Services;
 
 namespace RealEstate.Controllers
 {
-	[Route("objectdetails")]
+	[Route("objects")]
 	public class ObjectDetailsController : Controller
     {
         public ObjectDetailsController(IDataRepository repo)

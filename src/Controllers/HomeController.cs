@@ -35,12 +35,7 @@ namespace RealEstate.Controllers
 		{
 			var objectDetails = await _repo.GetObjectDetails(objectId);
 
-			var vm = new RealEstateObjectViewModel
-			{
-				Object = objectDetails,
-				ImageUrl = $"/assets/objectimages/object-{objectDetails.Id}.jpg"
-			};
-
+			var vm = objectDetails.ToViewModel();
 			return PartialView("_ObjectDetailsModal", vm);
 		}
 

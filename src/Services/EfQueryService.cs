@@ -36,5 +36,15 @@ namespace RealEstate.Services
 
 			return objectDetails;
 		}
+
+		public async Task<List<RealEstateObject>> GetAllObjects()
+		{
+			var objects = await _context
+				.RealEstateObjects
+				.OrderByDescending(r => r.LastUpdatedUtc)
+				.ToListAsync();
+
+			return objects;
+		}
 	}
 }

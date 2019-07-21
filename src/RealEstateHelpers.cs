@@ -1,11 +1,17 @@
 ﻿using RealEstate.Entities;
+using RealEstate.Models;
 using System;
 using System.Collections.Generic;
 
 namespace RealEstate
 {
-	internal class RealEstateHelpers
+	public static class RealEstateHelpers
 	{
+		public static RealEstateObjectViewModel ToViewModel(this RealEstateObject obj) => new RealEstateObjectViewModel {
+			Object = obj,
+			ImageUrl = $"/assets/objectimages/object-{obj.Id}.jpg"
+		};
+
 		internal static List<RealEstateObject> CreateRealEstateObjects()
 		{
 			var data = new List<RealEstateObject>();
