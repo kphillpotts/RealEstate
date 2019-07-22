@@ -25,14 +25,14 @@
              class="portfolio-item mx-auto modal-content"
              data-toggle="modal"
              data-target="#modalContainer"
-             data-contenturl="@Url.RouteUrl("ObjectDetailsRoute", new { objectId = featuredObject.Id })">
+             data-contenturl="@Url.RouteUrl("ObjectDetailsRoute", new { objectId = featuredObject.Object.Id })">
             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                 <div class="portfolio-item-caption-content text-center text-white">
                     <i class="fas fa-plus fa-3x"></i>
                 </div>
             </div>
-            @*<img class="img-fluid" src="img/portfolio/cabin.png" alt="">*@
-            <span class="text-center">@featuredObject.Name</span>
+            <img class="img-fluid" src="@featuredObject.ImageUrl" alt="">
+            <span class="text-center">@featuredObject.Object.Name</span>
         </div>
     </div>
     }

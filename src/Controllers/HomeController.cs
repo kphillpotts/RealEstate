@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.Models;
@@ -21,11 +22,11 @@ namespace RealEstate.Controllers
 		{
 			var featuredObjects = await _repo.GetFeaturedObjects();
 
-			var vm = new HomeViewModel
+            var vm = new HomeViewModel
 			{
 				ShowMasterHeader = true,
-				FeaturedObjects = featuredObjects
-			};
+				FeaturedObjects = featuredObjects.Select(r => r.ToViewModel()).ToList()
+            };
 
 			return View(vm);
 		}
